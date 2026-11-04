@@ -7,9 +7,9 @@ telemetry readouts.
 
 ## Pages
 
-- **Index (`/`)** — full-bleed hero, spec-sheet readout, disciplines, featured work and a gallery strip.
+- **Index (`/`)** — full-bleed hero, spec-sheet readout, disciplines, featured work and a field-log strip. English/Spanish switch in the header.
 - **Work (`/projects`)** — projects presented as engineering spec sheets with key metrics and expandable notes.
-- **Gallery (`/gallery`)** — filterable masonry grid of field photographs with a keyboard-navigable lightbox.
+- **Field log (`/gallery`)** — photos from my own posts, each with the story behind it.
 - **About (`/about`)** — bio, operating principles, a "bill of materials" toolkit and a service-log timeline.
 - **Contact (`/contact`)** — social channels plus a Netlify Forms contact form.
 
@@ -23,8 +23,9 @@ telemetry readouts.
 
 ## Editing content
 
-- Identity, availability and social links: `src/lib/site.ts`
-- Gallery photos: add a file to `public/img/` and an entry in `src/lib/gallery.ts`
+- Identity and social links: `src/lib/site.ts`; translated page copy: `src/lib/messages.ts`
+- Field-log photos: add a file to `public/img/` and an entry in `src/lib/gallery.ts`
+- Spanish content: add a `name.es.md` next to each Markdown file with `locale: es`
 - Projects: Markdown files in `content/projects/` (supports `code`, `year`, `role`, `order`, `stats`)
 - Experience and education: `content/jobs/` and `content/education/`
 

@@ -1,9 +1,9 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { allProjects } from 'content-collections'
 import { ArrowUpRight } from 'lucide-react'
-import { CdnImage } from '../components/CdnImage'
-import { ProjectPlaceholder } from '../components/ProjectPlaceholder'
+import { ProjectCover } from '../components/ProjectCover'
 import { SectionHead } from '../components/SectionHead'
+import { inLocale, useLocale, useT } from '../lib/i18n'
 import { pageMeta } from '../lib/site'
 import { sortProjects } from '../lib/projects'
 
@@ -17,16 +17,22 @@ export const Route = createFileRoute('/projects')({
 })
 
 function Projects() {
-  const projects = sortProjects(allProjects)
+  const { locale } = useLocale()
+  const t = useT()
+  const projects = sortProjects(inLocale(allProjects, locale))
+  const [titleStart, titleHl, titleEnd] = t.projects.title
+  const pad = (n: number) => String(n).padStart(2, '0')
   return (
     <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
       <SectionHead
         as="h1"
         n="01"
-        kicker={`Project register · ${projects.length} entries`}
+        kicker={t.projects.kicker(projects.length)}
         title={
           <>
-            Built to run <span className="hl">in production</span>.
+            {titleStart}
+            <span className="hl">{titleHl}</span>
+            {titleEnd}
           </>
         }
       />
@@ -41,28 +47,18 @@ function Projects() {
             >
               <div className="dim mb-4 text-ink/60">
                 <span>
-                  Sheet {String(i + 1).padStart(2, '0')} of{' '}
-                  {String(projects.length).padStart(2, '0')}
+                  {t.projects.sheet(pad(i + 1), pad(projects.length))}
                 </span>
               </div>
               <div
                 className={`grid gap-0 border-2 border-jungle bg-[#fbf6ea] lg:grid-cols-[1.25fr_1fr] ${i % 2 ? 'lg:[&>*:first-child]:order-2' : ''}`}
               >
                 <div className="relative min-h-72 overflow-hidden border-b-2 border-jungle lg:border-b-0">
-                  {project.image ? (
-                    <CdnImage
-                      src={project.image}
-                      alt={project.imageAlt ?? project.title}
-                      sizes="(min-width: 1024px) 55vw, 100vw"
-                      className="absolute inset-0 h-full w-full object-cover"
-                    />
-                  ) : (
-                    <ProjectPlaceholder
-                      code={project.code}
-                      title={project.title}
-                      className="absolute inset-0 h-full w-full"
-                    />
-                  )}
+                  <ProjectCover
+                    project={{ ...project, role: project.title }}
+                    sizes="(min-width: 1024px) 55vw, 100vw"
+                    className="absolute inset-0 h-full w-full"
+                  />
                   <span className="spec absolute left-0 top-0 bg-mango px-3 py-2 font-semibold text-jungle">
                     {project.code ?? `PRJ-${i + 1}`}
                   </span>
@@ -73,7 +69,11 @@ function Projects() {
                 >
                   <div className="spec mb-6 flex flex-wrap justify-between gap-2 text-ink/50">
                     <span>{project.role}</span>
-                    {project.year && <span>Rev {project.year}</span>}
+                    {project.year && (
+                      <span>
+                        {t.projects.rev} {project.year}
+                      </span>
+                    )}
                   </div>
                   <h2 className="font-display text-4xl font-extrabold leading-none tracking-tight sm:text-5xl">
                     {project.title}
@@ -100,7 +100,10 @@ function Projects() {
                     </dl>
                   )}
 
-                  <ul className="mt-6 flex flex-wrap gap-2" aria-label="Stack">
+                  <ul
+                    className="mt-6 flex flex-wrap gap-2"
+                    aria-label={t.projects.stack}
+                  >
                     {project.tags.map((tag) => (
                       <li key={tag} className="tag text-fern">
                         {tag}
@@ -110,7 +113,7 @@ function Projects() {
 
                   <details className="group mt-8 border-t border-dashed border-jungle/30 pt-4">
                     <summary className="spec flex cursor-pointer list-none items-center justify-between text-ink/70 hover:text-ink">
-                      Engineering notes
+                      {t.projects.notes}
                       <span className="text-lg transition-transform group-open:rotate-45">
                         +
                       </span>
@@ -130,7 +133,8 @@ function Projects() {
                           rel="noopener noreferrer"
                           className="btn-ghost"
                         >
-                          Source <ArrowUpRight size={14} aria-hidden="true" />
+                          {t.projects.source}{' '}
+                          <ArrowUpRight size={14} aria-hidden="true" />
                         </a>
                       )}
                       {project.liveUrl && (
@@ -140,7 +144,8 @@ function Projects() {
                           rel="noopener noreferrer"
                           className="btn-mango"
                         >
-                          Live <ArrowUpRight size={14} aria-hidden="true" />
+                          {t.projects.live}{' '}
+                          <ArrowUpRight size={14} aria-hidden="true" />
                         </a>
                       )}
                     </div>
@@ -151,15 +156,15 @@ function Projects() {
           ))}
         </div>
       ) : (
-        <p>No projects published yet.</p>
+        <p>{t.projects.empty}</p>
       )}
 
       <div className="mt-24 flex flex-col items-start justify-between gap-6 border-2 border-dashed border-jungle/40 p-8 sm:flex-row sm:items-center">
         <p className="font-display text-2xl font-bold tracking-tight">
-          Have a system that can’t afford to go down?
+          {t.projects.cta}
         </p>
         <Link to="/contact" className="btn-mango">
-          Start a project
+          {t.projects.start}
         </Link>
       </div>
     </div>

@@ -2,6 +2,7 @@ import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
 import { SiteHeader } from '../components/SiteHeader'
 import { NotFoundPage } from '../components/NotFoundPage'
 import { SiteFooter } from '../components/SiteFooter'
+import { LocaleProvider } from '../lib/i18n'
 import { site } from '../lib/site'
 
 import '../styles.css'
@@ -74,11 +75,13 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         >
           Skip to content
         </a>
-        <SiteHeader />
-        <main id="main-content" tabIndex={-1}>
-          {children}
-        </main>
-        <SiteFooter />
+        <LocaleProvider>
+          <SiteHeader />
+          <main id="main-content" tabIndex={-1}>
+            {children}
+          </main>
+          <SiteFooter />
+        </LocaleProvider>
         <Scripts />
       </body>
     </html>

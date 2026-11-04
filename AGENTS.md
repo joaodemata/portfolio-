@@ -8,16 +8,17 @@ local Markdown and TypeScript data.
 
 - `src/routes/` — `index` (home), `projects`, `gallery`, `about`, `contact`, `__root` (shell, fonts, header/footer).
 - `src/components/` — `SiteHeader` (nav + telemetry marquee), `SiteFooter`, `SectionHead` (§-numbered headings), `CdnImage`, `BrandIcons`, `ContactForm`, `NotFoundPage`, shadcn `ui/` primitives (mostly unused).
-- `src/lib/site.ts` — identity, availability, social links, `pageMeta`.
-- `src/lib/gallery.ts` — gallery items (src, caption, category, coords, intrinsic width/height).
+- `src/lib/site.ts` — language-neutral identity, social links, `pageMeta`.
+- `src/lib/messages.ts` + `src/lib/i18n.tsx` — English/Spanish UI copy, `LocaleProvider`, `useT()`, `inLocale()`. The server renders English; the saved choice (or browser language) applies after hydration.
+- `src/lib/gallery.ts` — field-log photos with per-language title, tag, alt and story.
 - `src/lib/images.ts` — Netlify Image CDN URL/srcset helpers.
 - `src/lib/content.ts` + `content-collections.ts` — Zod schemas (projects add `code`, `year`, `role`, `order`, `stats`) and sanitized Markdown.
-- `content/` — projects, jobs, education Markdown.
-- `public/img/` — AI-generated source photos (JPG). Never reference these directly in markup.
+- `content/` — projects, jobs, education Markdown. Each entry has an English `name.md` and a Spanish `name.es.md` (`locale: es`).
+- `public/img/` — photos from my own posts, the hand-drawn hero SVG and the Seedwise logo. Never reference JPGs directly in markup.
 
 ## Conventions
 
-- **Images:** always render through `CdnImage` (or `cdn()`), which emits `/.netlify/images?url=…&fm=webp` with a `srcset` and a tiny blurred placeholder. Pass `width`/`height` when known to avoid layout shift.
+- **Images:** always render through `CdnImage` (or `cdn()`), which emits `/.netlify/images?url=…&fm=webp` with a `srcset` and a tiny blurred placeholder (SVGs are served as-is). Pass `width`/`height` when known to avoid layout shift.
 - **Design system:** colors are Tailwind tokens `jungle`, `canopy`, `fern`, `paper`, `sand`, `mango`, `hibiscus`, `lagoon`, `ink`. Fonts: Bricolage Grotesque (display/body) and JetBrains Mono (`.spec` labels). Reusable classes in `styles.css`: `.grid-paper`, `.grid-dark`, `.spec`, `.ticks` (corner registration marks), `.dim` (dimension line), `.hl` (mango highlighter), `.tag`, and `@utility` buttons `btn`, `btn-mango`, `btn-ghost`. Square corners, 2px jungle borders, hard offset shadows — keep it.
 - Buttons are Tailwind `@utility` definitions (Tailwind v4 cannot `@apply` plain classes); override their colors with `!` modifiers.
 - Section headings use `SectionHead` with a § number matching the nav index.

@@ -1,24 +1,26 @@
 import { Link } from '@tanstack/react-router'
 import { ArrowUpRight } from 'lucide-react'
+import { useT } from '../lib/i18n'
 import { site, socials } from '../lib/site'
 
 export function SiteFooter() {
+  const t = useT()
   return (
     <footer className="grid-dark relative overflow-hidden text-paper">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
-          <p className="spec mb-4 text-lagoon">§ End of document</p>
+          <p className="spec mb-4 text-lagoon">{t.footer.end}</p>
           <p className="font-display text-4xl font-extrabold leading-[0.95] tracking-tight sm:text-5xl">
-            Got a high-stakes,
+            {t.footer.title[0]}
             <br />
-            <span className="text-mango">hard problem?</span>
+            <span className="text-mango">{t.footer.title[1]}</span>
           </p>
           <Link to="/contact" className="btn-mango mt-8">
-            Open a ticket <ArrowUpRight size={14} aria-hidden="true" />
+            {t.footer.cta} <ArrowUpRight size={14} aria-hidden="true" />
           </Link>
         </div>
         <div>
-          <p className="spec mb-4 text-paper/50">Channels</p>
+          <p className="spec mb-4 text-paper/50">{t.footer.channels}</p>
           <ul className="space-y-2">
             {socials.map((s) => (
               <li key={s.id}>
@@ -40,13 +42,13 @@ export function SiteFooter() {
           </ul>
         </div>
         <div className="space-y-3">
-          <p className="spec text-paper/50">Base of operations</p>
-          <p className="text-lg">{site.location}</p>
+          <p className="spec text-paper/50">{t.footer.base}</p>
+          <p className="text-lg">{t.location}</p>
           <p className="spec text-lagoon">{site.coordinates}</p>
           <p className="spec pt-6 text-paper/40">
             © {new Date().getFullYear()} {site.name}
             <br />
-            Designed, built &amp; commissioned on site
+            {t.footer.tagline}
           </p>
         </div>
       </div>
