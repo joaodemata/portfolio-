@@ -15,7 +15,7 @@ export const Route = createFileRoute('/gallery')({
   head: () =>
     pageMeta(
       'Gallery',
-      'Field photographs from research stations, reefs, rainforests and workbenches.',
+      'Photographs from away from the keyboard and the production line.',
     ),
 })
 
@@ -36,11 +36,11 @@ function Gallery() {
       <SectionHead
         as="h1"
         n="02"
-        kicker="Field gallery"
+        kicker="Gallery"
         title={
           <>
-            Photographs, taken between <span className="hl">soldering</span>{' '}
-            and swimming.
+            Photographs, taken between <span className="hl">deploys</span> and
+            commissioning.
           </>
         }
       />

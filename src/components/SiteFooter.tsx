@@ -9,7 +9,7 @@ export function SiteFooter() {
         <div>
           <p className="spec mb-4 text-lagoon">§ End of document</p>
           <p className="font-display text-4xl font-extrabold leading-[0.95] tracking-tight sm:text-5xl">
-            Got a hot, humid,
+            Got a high-stakes,
             <br />
             <span className="text-mango">hard problem?</span>
           </p>
@@ -46,7 +46,7 @@ export function SiteFooter() {
           <p className="spec pt-6 text-paper/40">
             © {new Date().getFullYear()} {site.name}
             <br />
-            Drawn, built &amp; tested in the tropics
+            Designed, built &amp; commissioned on site
           </p>
         </div>
       </div>
@@ -54,7 +54,7 @@ export function SiteFooter() {
         aria-hidden="true"
         className="pointer-events-none select-none whitespace-nowrap px-4 pb-2 font-display text-[18vw] font-extrabold leading-[0.8] tracking-tighter text-paper/[0.04]"
       >
-        TROPICAL/ENG
+        BACKEND/PLC
       </p>
     </footer>
   )

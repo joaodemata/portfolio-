@@ -1,6 +1,7 @@
-# João de Mata — Field Engineer Portfolio
+# Joao Da Mata — Backend & Automation Portfolio
 
-A personal portfolio with a tropical-meets-engineering identity: jungle greens,
+Personal portfolio of Joao Da Mata, electrical engineer working on backends,
+payment gateways and BIW production-line automation. Visual identity: jungle greens,
 mango and lagoon accents, blueprint grid paper, spec-sheet typography and
 telemetry readouts.
 

@@ -10,15 +10,15 @@ const links = [
 ] as const
 
 const telemetry = [
-  'STATUS ● OPERATIONAL',
+  'STATUS ● OPEN TO WORK',
   `LOC ${site.coordinates}`,
-  'AIR 29.4 °C',
-  'RH 84 %',
-  'TIDE +1.2 M ↑',
-  'SOLAR 812 W/M²',
-  'WIND 11 KN SW',
+  'STACK NODE.JS · GO · TYPESCRIPT',
+  'DB POSTGRESQL · MONGODB',
+  'PROTO REST · SOAP · WEBSOCKETS',
+  'PLC STUDIO 5000 · TIA PORTAL',
+  'OEM JLR · VOLVO',
+  'LANG ES · PT · EN',
   'COFFEE 3 / ∞',
-  'UV INDEX 11 — WEAR A HAT',
 ]
 
 export function SiteHeader() {
@@ -37,7 +37,7 @@ export function SiteHeader() {
               {site.name}
             </span>
             <span className="spec block text-paper/55">
-              Field station · rev 26.11
+              Backend · Automation · rev 26.11
             </span>
           </span>
         </Link>
