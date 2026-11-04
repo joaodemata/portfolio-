@@ -2,6 +2,7 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { allProjects } from 'content-collections'
 import { ArrowRight, ArrowUpRight } from 'lucide-react'
 import { CdnImage } from '../components/CdnImage'
+import { ProjectPlaceholder } from '../components/ProjectPlaceholder'
 import { SectionHead } from '../components/SectionHead'
 import { gallery } from '../lib/gallery'
 import { site, pageMeta } from '../lib/site'
@@ -9,14 +10,14 @@ import { sortProjects } from '../lib/projects'
 
 export const Route = createFileRoute('/')({
   component: PortfolioHome,
-  head: () => pageMeta('Field engineer', site.description),
+  head: () => pageMeta(site.role, site.description),
 })
 
 const readouts = [
-  { label: 'Years in the field', value: '08' },
-  { label: 'Devices deployed', value: '310+' },
-  { label: 'Countries', value: '06' },
-  { label: 'Salt-spray failures', value: '0*' },
+  { label: 'Years in backend', value: '05+' },
+  { label: 'BIW plants', value: '03' },
+  { label: 'Languages', value: '03' },
+  { label: 'Line downtime', value: '0*' },
 ]
 
 function PortfolioHome() {
@@ -46,11 +47,11 @@ function PortfolioHome() {
               {site.role} · {site.location}
             </p>
             <h1 className="font-display text-[clamp(3rem,9vw,8.5rem)] font-extrabold leading-[0.86] tracking-[-0.04em]">
-              Engineering
+              Systems
               <br />
-              for <span className="italic text-mango">warm</span>
+              that <span className="italic text-mango">don’t</span>
               <br />
-              latitudes.
+              stop.
             </h1>
             <p className="mt-8 max-w-xl text-lg text-paper/80 sm:text-xl">
               {site.summary}
@@ -60,10 +61,10 @@ function PortfolioHome() {
                 View the work <ArrowRight size={14} aria-hidden="true" />
               </Link>
               <Link
-                to="/gallery"
+                to="/about"
                 className="btn-ghost !border-paper !text-paper hover:!bg-paper hover:!text-jungle"
               >
-                Field gallery
+                Experience
               </Link>
             </div>
           </div>
@@ -87,7 +88,7 @@ function PortfolioHome() {
               ))}
             </dl>
             <p className="spec mt-4 text-[9px] text-paper/40">
-              * that we talk about publicly
+              * integrating new models at Volvo Torslanda
             </p>
             <p className="spec mt-4 border-t border-paper/15 pt-3 text-lagoon">
               ◉ {site.availability}
@@ -95,7 +96,7 @@ function PortfolioHome() {
           </aside>
         </div>
         <p className="spec absolute right-4 top-6 hidden text-paper/50 sm:block">
-          IMG 0001 — Lagoon Station 03 · {gallery[0].coords}
+          IMG 0001 — {site.location} · {site.coordinates}
         </p>
       </section>
 
@@ -109,21 +110,21 @@ function PortfolioHome() {
         <div className="grid gap-px border border-jungle/20 bg-jungle/20 md:grid-cols-3">
           {[
             {
-              code: 'HW',
-              title: 'Rugged hardware',
-              text: 'Sensor nodes, PCBs and enclosures specified for IP68, UV and the occasional crab.',
+              code: 'BE',
+              title: 'High-scale backends',
+              text: 'Node.js and Go services, REST and webhook APIs, payment gateways talking SOAP to banking cores.',
               color: 'bg-lagoon',
             },
             {
-              code: 'ST',
-              title: 'Light structures',
-              text: 'Bamboo, aluminium and steel — solar canopies and walkways that move with the wind.',
+              code: 'PLC',
+              title: 'Industrial automation',
+              text: 'PLC programming and commissioning for Body in White lines — Studio 5000, TIA Portal, Ignition.',
               color: 'bg-mango',
             },
             {
-              code: 'SW',
-              title: 'Offline-first software',
-              text: 'Telemetry, dashboards and data pipelines that keep working when the signal doesn’t.',
+              code: 'QA',
+              title: 'Test & commissioning',
+              text: 'Postman suites, test matrices and virtual commissioning — proven before it touches production.',
               color: 'bg-hibiscus',
             },
           ].map((d, i) => (
@@ -170,16 +171,22 @@ function PortfolioHome() {
                 className="group block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-mango"
               >
                 <div className="relative overflow-hidden border-2 border-jungle">
-                  {project.image && (
+                  {project.image ? (
                     <CdnImage
                       src={project.image}
                       alt={project.imageAlt ?? project.title}
                       sizes="(min-width: 768px) 50vw, 100vw"
                       className="aspect-[16/10] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                     />
+                  ) : (
+                    <ProjectPlaceholder
+                      code={project.code}
+                      title={project.role ?? project.title}
+                      className="aspect-[16/10] w-full"
+                    />
                   )}
                   <span className="spec absolute left-0 top-0 bg-jungle px-3 py-2 text-mango">
-                    {project.code} · {project.year}
+                    {[project.code, project.year].filter(Boolean).join(' · ')}
                   </span>
                 </div>
                 <div className="mt-5 flex items-start justify-between gap-6">
@@ -206,8 +213,8 @@ function PortfolioHome() {
       <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6">
         <SectionHead
           n="03"
-          kicker="Field log"
-          title="Notes from the humid edge."
+          kicker="Gallery"
+          title="Away from the keyboard."
           action={
             <Link to="/gallery" className="btn-ghost">
               Open gallery <ArrowRight size={14} aria-hidden="true" />
@@ -241,7 +248,7 @@ function PortfolioHome() {
       <section className="bg-mango text-jungle">
         <div className="mx-auto flex max-w-7xl flex-col gap-8 px-4 py-20 sm:px-6 md:flex-row md:items-end md:justify-between">
           <p className="max-w-4xl font-display text-[clamp(2rem,5vw,4rem)] font-extrabold leading-[0.95] tracking-tight">
-            “If it works at 34 °C and 95% humidity, it works anywhere.”
+            “If it runs on a live production line, it runs anywhere.”
           </p>
           <Link
             to="/about"

@@ -1,6 +1,6 @@
 # Agent notes
 
-Personal portfolio for a tropical field engineer. TanStack Start (React 19) on
+Personal portfolio for a backend & automation engineer. TanStack Start (React 19) on
 Netlify, Tailwind v4, Content Collections. No database or auth — content is
 local Markdown and TypeScript data.
 

@@ -1,10 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { ArrowUpRight, AtSign } from 'lucide-react'
-import {
-  GithubIcon,
-  InstagramIcon,
-  LinkedinIcon,
-} from '../components/BrandIcons'
+import { GithubIcon, LinkedinIcon } from '../components/BrandIcons'
 import { ContactForm } from '../components/ContactForm'
 import { SectionHead } from '../components/SectionHead'
 import { pageMeta, site, socials } from '../lib/site'
@@ -14,14 +10,13 @@ export const Route = createFileRoute('/contact')({
   head: () =>
     pageMeta(
       'Contact',
-      'Start a field project, ask a question, or just say hi from the tropics.',
+      'Talk about a backend, payments or automation role or project — or just say hi.',
     ),
 })
 
 const icons = {
   github: GithubIcon,
   linkedin: LinkedinIcon,
-  instagram: InstagramIcon,
   email: AtSign,
 } as const
 
@@ -42,9 +37,9 @@ function Contact() {
       <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr]">
         <section aria-labelledby="channels">
           <p className="max-w-lg text-xl text-ink/80">
-            Tell me about the site, the problem and how much rain it gets. I
-            take on a handful of field projects each year — sensors, solar
-            structures, or the software that ties them together.
+            Tell me about the system, the problem and what it can’t afford to
+            get wrong. I work on backends and payment platforms, PLC automation
+            and commissioning — and the software that ties them together.
           </p>
 
           <div className="mt-8 inline-flex items-center gap-3 border-2 border-jungle bg-lagoon/20 px-4 py-2">
@@ -98,7 +93,7 @@ function Contact() {
             </div>
             <div>
               <dt className="spec text-ink/50">Time zone</dt>
-              <dd className="mt-1 text-lg">UTC −06:00</dd>
+              <dd className="mt-1 text-lg">{site.timeZone}</dd>
             </div>
           </dl>
         </section>

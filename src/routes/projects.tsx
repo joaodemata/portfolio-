@@ -2,6 +2,7 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { allProjects } from 'content-collections'
 import { ArrowUpRight } from 'lucide-react'
 import { CdnImage } from '../components/CdnImage'
+import { ProjectPlaceholder } from '../components/ProjectPlaceholder'
 import { SectionHead } from '../components/SectionHead'
 import { pageMeta } from '../lib/site'
 import { sortProjects } from '../lib/projects'
@@ -11,7 +12,7 @@ export const Route = createFileRoute('/projects')({
   head: () =>
     pageMeta(
       'Work',
-      'Field-deployed hardware, structures and software — with the numbers to back them up.',
+      'Payment gateways, production-line automation and side projects — with the numbers to back them up.',
     ),
 })
 
@@ -25,7 +26,7 @@ function Projects() {
         kicker={`Project register · ${projects.length} entries`}
         title={
           <>
-            Built to survive the <span className="hl">rainy season</span>.
+            Built to run <span className="hl">in production</span>.
           </>
         }
       />
@@ -48,12 +49,18 @@ function Projects() {
                 className={`grid gap-0 border-2 border-jungle bg-[#fbf6ea] lg:grid-cols-[1.25fr_1fr] ${i % 2 ? 'lg:[&>*:first-child]:order-2' : ''}`}
               >
                 <div className="relative min-h-72 overflow-hidden border-b-2 border-jungle lg:border-b-0">
-                  {project.image && (
+                  {project.image ? (
                     <CdnImage
                       src={project.image}
                       alt={project.imageAlt ?? project.title}
                       sizes="(min-width: 1024px) 55vw, 100vw"
                       className="absolute inset-0 h-full w-full object-cover"
+                    />
+                  ) : (
+                    <ProjectPlaceholder
+                      code={project.code}
+                      title={project.title}
+                      className="absolute inset-0 h-full w-full"
                     />
                   )}
                   <span className="spec absolute left-0 top-0 bg-mango px-3 py-2 font-semibold text-jungle">
@@ -66,7 +73,7 @@ function Projects() {
                 >
                   <div className="spec mb-6 flex flex-wrap justify-between gap-2 text-ink/50">
                     <span>{project.role}</span>
-                    <span>Rev {project.year}</span>
+                    {project.year && <span>Rev {project.year}</span>}
                   </div>
                   <h2 className="font-display text-4xl font-extrabold leading-none tracking-tight sm:text-5xl">
                     {project.title}
@@ -149,7 +156,7 @@ function Projects() {
 
       <div className="mt-24 flex flex-col items-start justify-between gap-6 border-2 border-dashed border-jungle/40 p-8 sm:flex-row sm:items-center">
         <p className="font-display text-2xl font-bold tracking-tight">
-          Have a site that eats electronics for breakfast?
+          Have a system that can’t afford to go down?
         </p>
         <Link to="/contact" className="btn-mango">
           Start a project

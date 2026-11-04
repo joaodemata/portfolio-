@@ -3,7 +3,7 @@ import { allEducations, allJobs } from 'content-collections'
 import { ArrowRight } from 'lucide-react'
 import { CdnImage } from '../components/CdnImage'
 import { SectionHead } from '../components/SectionHead'
-import { chronologicalEntries, formatDate } from '../lib/chronology'
+import { chronologicalEntries } from '../lib/chronology'
 import { pageMeta, site } from '../lib/site'
 
 export const Route = createFileRoute('/about')({
@@ -11,38 +11,59 @@ export const Route = createFileRoute('/about')({
   head: () =>
     pageMeta(
       'About',
-      'Who I am, how I work, and where I have worked — a field engineer in the tropics.',
+      'Who I am, how I work, and where I have worked — backend engineering and industrial automation.',
     ),
 })
 
 const principles = [
   {
     k: 'P-01',
-    title: 'Design for the worst week',
-    text: 'Monsoon, brownout, no boat for nine days. If it survives that, the average week takes care of itself.',
+    title: 'Zero downtime is the spec',
+    text: 'A payment that fails or a line that stops costs real money. Design for the busiest hour, not the average one.',
   },
   {
     k: 'P-02',
-    title: 'Repairable beats clever',
-    text: 'Every part should be swappable with a screwdriver and whatever the local hardware store stocks.',
+    title: 'Build it from scratch, own it',
+    text: 'From an empty BIW zone or an empty repo — I take the architecture all the way to commissioning.',
   },
   {
     k: 'P-03',
-    title: 'Measure, then argue',
-    text: 'A cheap sensor in the field beats an expensive model on a laptop. Data settles debates.',
+    title: 'Test matrices before opinions',
+    text: 'Postman suites, virtual commissioning and structured test matrices settle debates before production does.',
   },
   {
     k: 'P-04',
-    title: 'Build with the people who stay',
-    text: 'The best installations are maintained by the community that uses them, not by me.',
+    title: 'Talk to the people who run it',
+    text: 'Requirements come from operators and clients — from PedidosYa in Argentina to line leads in Sweden.',
   },
 ]
 
 const toolkit = [
-  ['Hardware', 'KiCad · STM32 · ESP32 · LoRaWAN · conformal coating'],
-  ['Structures', 'Fusion 360 · bamboo joinery · FEA · wind loading'],
-  ['Software', 'TypeScript · React · Rust · Python · PostgreSQL'],
-  ['Field kit', 'Multimeter · drone · dive cert · machete (for the vines)'],
+  [
+    'Backend',
+    'Node.js · Go · JavaScript/TypeScript · REST API design · microservices · webhooks',
+  ],
+  [
+    'Data & finance',
+    'PostgreSQL · MongoDB · P2P matching algorithms · B2B payment gateways',
+  ],
+  ['Protocols', 'HTTP/REST · SOAP · WebSockets · TCP/IP'],
+  [
+    'Automation (BIW)',
+    'Siemens TIA Portal · Rockwell Studio 5000 · Ignition SCADA · interlocking logic · cycle time optimisation · SEW drives · FESTO',
+  ],
+  [
+    'Testing & QA',
+    'Postman automation · test matrices · virtual commissioning · safety checks',
+  ],
+  [
+    'Languages',
+    'Spanish (native) · Portuguese (fluent) · English (professional, UK & Sweden)',
+  ],
+  [
+    'Education',
+    'B.S. Electrical Engineering — Universidad Metropolitana (UNIMET), Venezuela',
+  ],
 ]
 
 function About() {
@@ -56,7 +77,7 @@ function About() {
         kicker="About the engineer"
         title={
           <>
-            Half lab, half <span className="hl">jungle</span>.
+            Half code, half <span className="hl">control</span>.
           </>
         }
       />
@@ -76,30 +97,28 @@ function About() {
             className="h-auto w-full border-2 border-jungle"
           />
           <figcaption className="spec mt-3 flex justify-between text-ink/50">
-            <span>Self-portrait, ridge line</span>
+            <span>{site.location}</span>
             <span>{site.coordinates}</span>
           </figcaption>
-          <div className="sway absolute -right-6 -top-8 hidden select-none text-7xl lg:block" aria-hidden="true">
-            🌴
-          </div>
         </figure>
 
         <div className="space-y-6 text-xl leading-relaxed text-ink/85">
           <p className="font-display text-3xl font-bold leading-snug tracking-tight text-ink">
-            I’m {site.name.split(' ')[0]} — an electrical engineer who swapped
-            the server room for the rainforest.
+            I’m {site.name.split(' ')[0]} — an electrical engineer who writes
+            backends and programs production lines.
           </p>
           <p>
-            For eight years I’ve built things that live outdoors in the
-            tropics: water-quality sensors in mangroves, solar canopies over
-            fruit markets, and offline-first dashboards for research boats that
-            spend weeks out of signal.
+            As lead backend developer at Chinchin I architected a national B2B
+            payment gateway for PedidosYa, INTT and major retailers. Today, at
+            Atlas Company, I program and commission PLCs for Body in White lines
+            at Jaguar Land Rover in Solihull and Liverpool and at Volvo in
+            Torslanda.
           </p>
           <p>
-            My work sits where hardware, light structures and software overlap.
-            I sketch on paper, prototype on a beach-hut bench, and test where it
-            matters — in the salt, sun and humidity the thing will actually
-            face.
+            Before that I built a P2P currency exchange for a national bank,
+            RESTful content systems for TV Azteca, and photovoltaic and diesel
+            backup power for critical infrastructure. Based in {site.location},
+            open to relocation and on-site work anywhere.
           </p>
           <div className="flex flex-wrap gap-4 pt-4">
             <Link to="/contact" className="btn-mango">
@@ -131,7 +150,10 @@ function About() {
       </section>
 
       {/* ——— Toolkit ——— */}
-      <section className="mt-28 grid gap-10 lg:grid-cols-[1fr_2fr]" aria-labelledby="toolkit">
+      <section
+        className="mt-28 grid gap-10 lg:grid-cols-[1fr_2fr]"
+        aria-labelledby="toolkit"
+      >
         <h2
           id="toolkit"
           className="font-display text-4xl font-extrabold tracking-tight"
@@ -172,7 +194,10 @@ function About() {
           {[...jobs, ...schools].map((entry) => {
             const isJob = 'jobTitle' in entry
             return (
-              <li key={entry._meta.path} className="relative mb-12 pl-8 last:mb-0">
+              <li
+                key={entry._meta.path}
+                className="relative mb-12 pl-8 last:mb-0"
+              >
                 <span
                   className={`absolute -left-[9px] top-1.5 h-4 w-4 border-2 border-jungle ${
                     entry.endDate ? 'bg-paper' : 'bg-mango'
@@ -181,12 +206,12 @@ function About() {
                 />
                 <p className="spec text-ink/55">
                   <time dateTime={entry.startDate}>
-                    {formatDate(entry.startDate)}
+                    {entry.startDate.slice(0, 4)}
                   </time>{' '}
                   →{' '}
                   {entry.endDate ? (
                     <time dateTime={entry.endDate}>
-                      {formatDate(entry.endDate)}
+                      {entry.endDate.slice(0, 4)}
                     </time>
                   ) : (
                     <span className="text-fern">Present</span>
