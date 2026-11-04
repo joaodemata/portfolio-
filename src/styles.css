@@ -1,0 +1,280 @@
+@import 'tailwindcss' source('../');
+
+@plugin "tailwindcss-animate";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --jungle: #0a261c;
+  --canopy: #12422f;
+  --fern: #2f7a4f;
+  --paper: #f3ead6;
+  --sand: #e7d9b8;
+  --mango: #ff7a2f;
+  --hibiscus: #ef4677;
+  --lagoon: #17c2ae;
+  --ink: #0a261c;
+
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: #fbf6ea;
+  --card-foreground: var(--ink);
+  --popover: #fbf6ea;
+  --popover-foreground: var(--ink);
+  --primary: var(--jungle);
+  --primary-foreground: var(--paper);
+  --secondary: var(--sand);
+  --secondary-foreground: var(--ink);
+  --muted: var(--sand);
+  --muted-foreground: #4b5f55;
+  --accent: var(--mango);
+  --accent-foreground: var(--ink);
+  --destructive: #c2263f;
+  --destructive-foreground: #c2263f;
+  --border: rgb(10 38 28 / 0.18);
+  --input: rgb(10 38 28 / 0.3);
+  --ring: var(--mango);
+  --chart-1: var(--mango);
+  --chart-2: var(--lagoon);
+  --chart-3: var(--fern);
+  --chart-4: var(--hibiscus);
+  --chart-5: var(--sand);
+  --radius: 0.25rem;
+  --sidebar: var(--paper);
+  --sidebar-foreground: var(--ink);
+  --sidebar-primary: var(--jungle);
+  --sidebar-primary-foreground: var(--paper);
+  --sidebar-accent: var(--sand);
+  --sidebar-accent-foreground: var(--ink);
+  --sidebar-border: rgb(10 38 28 / 0.18);
+  --sidebar-ring: var(--mango);
+}
+
+@theme inline {
+  --font-display: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  --color-jungle: var(--jungle);
+  --color-canopy: var(--canopy);
+  --color-fern: var(--fern);
+  --color-paper: var(--paper);
+  --color-sand: var(--sand);
+  --color-mango: var(--mango);
+  --color-hibiscus: var(--hibiscus);
+  --color-lagoon: var(--lagoon);
+  --color-ink: var(--ink);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+body {
+  @apply m-0 font-sans;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-optical-sizing: auto;
+}
+
+::selection {
+  background: var(--mango);
+  color: var(--jungle);
+}
+
+/* ——— Engineering paper ——— */
+.grid-paper {
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(rgb(10 38 28 / 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(10 38 28 / 0.07) 1px, transparent 1px),
+    linear-gradient(rgb(10 38 28 / 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(10 38 28 / 0.035) 1px, transparent 1px);
+  background-size:
+    96px 96px,
+    96px 96px,
+    16px 16px,
+    16px 16px;
+}
+
+.grid-dark {
+  background-color: var(--jungle);
+  background-image:
+    linear-gradient(rgb(243 234 214 / 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(243 234 214 / 0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.spec {
+  @apply font-mono text-[11px] uppercase tracking-[0.18em];
+}
+
+/* Corner registration marks */
+.ticks {
+  position: relative;
+}
+.ticks::before,
+.ticks::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+  border-color: currentColor;
+  opacity: 0.7;
+}
+.ticks::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid;
+  border-left: 2px solid;
+}
+.ticks::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+}
+
+/* Dimension line: |<———— label ————>| */
+.dim {
+  @apply flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.2em];
+}
+.dim::before,
+.dim::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.45;
+}
+
+.hl {
+  background: linear-gradient(
+    transparent 58%,
+    var(--mango) 58%,
+    var(--mango) 92%,
+    transparent 92%
+  );
+  padding: 0 0.08em;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee {
+  animation: marquee 40s linear infinite;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.rise {
+  animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes sway {
+  0%,
+  100% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(4deg);
+  }
+}
+.sway {
+  transform-origin: 50% 100%;
+  animation: sway 7s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee,
+  .rise,
+  .sway {
+    animation: none;
+  }
+}
+
+@utility btn {
+  @apply inline-flex items-center gap-2 px-5 py-3 font-mono text-xs uppercase tracking-[0.16em] border-2 border-jungle transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mango;
+}
+@utility btn-mango {
+  @apply btn bg-mango text-jungle shadow-[4px_4px_0_var(--jungle)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_var(--jungle)];
+}
+@utility btn-ghost {
+  @apply btn bg-transparent hover:bg-jungle hover:text-paper;
+}
+
+.tag {
+  @apply inline-flex items-center gap-1.5 border border-current/30 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.14em];
+}
+
+.contact-input {
+  @apply w-full border-0 border-b-2 border-jungle/40 bg-transparent px-0 py-3 text-lg text-ink placeholder:text-ink/35 focus-visible:border-mango focus-visible:outline-none transition-colors;
+}
+
+.contact-button {
+  @apply btn-mango disabled:cursor-wait;
+}
+
+.prose {
+  overflow-wrap: anywhere;
+}
+
+.prose pre {
+  max-width: 100%;
+  overflow-x: auto;
+}
