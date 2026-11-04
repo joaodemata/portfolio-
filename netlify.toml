@@ -1,0 +1,14 @@
+[build]
+  command = "( [ -x node_modules/.bin/vite ] || npx -y pnpm@10 install --frozen-lockfile ) && node_modules/.bin/vite build"
+  publish = "dist/client"
+[build.environment]
+  NODE_VERSION = "24"
+[dev]
+  framework = "#custom"
+  command = "npm run dev"
+  targetPort = 3000
+  port = 8888
+
+# Removes the unused Netlify Emails function, whose upload breaks deploys.
+[[plugins]]
+  package = "./plugins/skip-emails-function"
