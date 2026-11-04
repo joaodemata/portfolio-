@@ -8,8 +8,8 @@ description: 'A market-opportunity engine: TradingView alerts open opportunities
 tags: ['Go', 'MongoDB', 'React', 'TypeScript', 'Webhooks', 'WebSockets']
 github: 'https://github.com/joaodemata/c-trd'
 liveUrl: 'https://app.seedwise.io'
-image: '/img/p-telemetry.jpg'
-imageAlt: 'A rugged tablet showing live charts and telemetry graphs'
+image: '/img/seedwise-logo.svg'
+imageAlt: 'Seedwise logo: a seedling growing a gold coin'
 stats:
   - { label: 'Evaluation cycle', value: '1 min' }
   - { label: 'Market data APIs', value: '03' }

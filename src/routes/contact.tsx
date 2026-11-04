@@ -3,6 +3,7 @@ import { ArrowUpRight, AtSign } from 'lucide-react'
 import { GithubIcon, LinkedinIcon } from '../components/BrandIcons'
 import { ContactForm } from '../components/ContactForm'
 import { SectionHead } from '../components/SectionHead'
+import { useT } from '../lib/i18n'
 import { pageMeta, site, socials } from '../lib/site'
 
 export const Route = createFileRoute('/contact')({
@@ -21,34 +22,34 @@ const icons = {
 } as const
 
 function Contact() {
+  const t = useT()
+  const [titleStart, titleHl, titleEnd] = t.contact.title
   return (
     <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
       <SectionHead
         as="h1"
         n="04"
-        kicker="Contact"
+        kicker={t.nav.contact}
         title={
           <>
-            Send a signal. I’ll <span className="hl">radio back</span>.
+            {titleStart}
+            <span className="hl">{titleHl}</span>
+            {titleEnd}
           </>
         }
       />
 
       <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr]">
         <section aria-labelledby="channels">
-          <p className="max-w-lg text-xl text-ink/80">
-            Tell me about the system, the problem and what it can’t afford to
-            get wrong. I work on backends and payment platforms, PLC automation
-            and commissioning — and the software that ties them together.
-          </p>
+          <p className="max-w-lg text-xl text-ink/80">{t.contact.intro}</p>
 
           <div className="mt-8 inline-flex items-center gap-3 border-2 border-jungle bg-lagoon/20 px-4 py-2">
             <span className="h-2 w-2 animate-pulse rounded-full bg-fern" />
-            <span className="spec">{site.availability}</span>
+            <span className="spec">{t.availability}</span>
           </div>
 
           <h2 id="channels" className="spec mb-4 mt-14 text-ink/50">
-            Other frequencies
+            {t.contact.channels}
           </h2>
           <ul className="border-t-2 border-jungle">
             {socials.map((s, i) => {
@@ -73,7 +74,7 @@ function Contact() {
                         {s.label}
                       </span>
                       <span className="spec block truncate text-[10px] text-ink/50 group-hover:text-paper/60">
-                        {s.handle} — {s.note}
+                        {s.handle} — {t.contact.socialNotes[s.id]}
                       </span>
                     </span>
                     <ArrowUpRight
@@ -88,11 +89,11 @@ function Contact() {
 
           <dl className="mt-10 grid grid-cols-2 gap-6">
             <div>
-              <dt className="spec text-ink/50">Base</dt>
-              <dd className="mt-1 text-lg">{site.location}</dd>
+              <dt className="spec text-ink/50">{t.contact.base}</dt>
+              <dd className="mt-1 text-lg">{t.location}</dd>
             </div>
             <div>
-              <dt className="spec text-ink/50">Time zone</dt>
+              <dt className="spec text-ink/50">{t.contact.timeZone}</dt>
               <dd className="mt-1 text-lg">{site.timeZone}</dd>
             </div>
           </dl>

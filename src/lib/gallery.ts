@@ -1,123 +1,56 @@
-export type GalleryCategory = 'Field' | 'Build' | 'Flora' | 'Fauna'
+import type { Locale } from './i18n'
+
+type Localized = Record<Locale, string>
 
 export type GalleryItem = {
   id: string
   src: string
-  title: string
-  caption: string
-  category: GalleryCategory
-  coords: string
+  tag: Localized
+  title: Localized
+  alt: Localized
+  story: Localized
   width: number
   height: number
 }
 
-/** Field photographs. Drop new files in public/img and add an entry here. */
+/** Photos from my own LinkedIn posts. Drop new files in public/img and add an entry here. */
 export const gallery: GalleryItem[] = [
   {
-    id: 'station',
-    src: '/img/hero.jpg',
-    title: 'Lagoon Station 03',
-    caption: 'Stilted research modules, solar roofs, 340 m truss walkway.',
-    category: 'Build',
-    coords: '08°31′N 83°17′W',
-    width: 1376,
-    height: 768,
+    id: 'generators',
+    src: '/img/generator-commissioning.jpg',
+    tag: { en: 'Power systems', es: 'Sistemas de potencia' },
+    title: {
+      en: 'Paralleling two FG Wilson gensets',
+      es: 'Sincronización de dos plantas FG Wilson',
+    },
+    alt: {
+      en: 'A blue FG Wilson diesel generator in a plant room, with a laptop connected for commissioning',
+      es: 'Un generador diésel FG Wilson azul en una sala de máquinas, con un portátil conectado para la puesta en marcha',
+    },
+    story: {
+      en: 'First phase of retrofitting a closed-transition transfer for two FG Wilson generators (P900E1 and P688E1) able to run in parallel. The Woodward EGCP-2 controllers were replaced with InteliGen NTC base boxes and InteliVision 5 screens to monitor, protect, synchronise and control each genset breaker, plus an InteliMains controller to synchronise the pair with the grid. The transfer cells run on a Modicon M340 PLC and the cooling auxiliaries on a Twido PLC.',
+      es: 'Primera fase de la renovación de una transferencia de transición cerrada para dos plantas eléctricas FG Wilson (P900E1 y P688E1) capaces de trabajar en paralelo. Los controladores Woodward EGCP-2 se sustituyeron por InteliGen NTC con pantallas InteliVision 5 para monitorizar, proteger, sincronizar y controlar el interruptor de cada grupo electrógeno, más un InteliMains que sincroniza el par con la red. Las celdas de transferencia funcionan con un PLC Modicon M340 y los auxiliares de refrigeración con un PLC Twido.',
+    },
+    width: 800,
+    height: 997,
   },
   {
-    id: 'monstera',
-    src: '/img/g-monstera.jpg',
-    title: 'Load paths',
-    caption: 'Monstera deliciosa — nature’s own truss diagram.',
-    category: 'Flora',
-    coords: '08°33′N 83°21′W',
-    width: 896,
-    height: 1200,
+    id: 'thesis',
+    src: '/img/thesis-approval.jpg',
+    tag: { en: 'Milestone', es: 'Hito' },
+    title: {
+      en: 'Thesis approved with honours',
+      es: 'Tesis aprobada con mención honorífica',
+    },
+    alt: {
+      en: 'Joao holding his approved thesis in front of a large tree on the UNIMET campus',
+      es: 'Joao sosteniendo su tesis aprobada frente a un gran árbol en el campus de la UNIMET',
+    },
+    story: {
+      en: '“Design of a robust controller for a magnetic levitation system of a sphere” — my electrical engineering thesis at Universidad Metropolitana, with Christian Ramos and our tutor Pedro Teppa. Honours for an original robust-control modelling method, a new contribution to fault-tolerant optimal control, and extensive, well-documented MATLAB work on a nonlinear, unstable system.',
+      es: '“Diseño de un controlador robusto para un sistema de flotación magnética de una esfera” — mi trabajo de grado de ingeniería eléctrica en la Universidad Metropolitana, junto a Christian Ramos y nuestro tutor Pedro Teppa. Mención honorífica por una metodología original para modelar control robusto, un aporte novedoso al control óptimo tolerante a fallas y un uso extenso y bien documentado de MATLAB sobre un sistema no lineal e inestable.',
+    },
+    width: 800,
+    height: 1066,
   },
-  {
-    id: 'drone',
-    src: '/img/g-drone.jpg',
-    title: 'Canopy survey, 05:42',
-    caption: 'Mapping flight before the mist burns off.',
-    category: 'Field',
-    coords: '08°38′N 83°26′W',
-    width: 1200,
-    height: 896,
-  },
-  {
-    id: 'toucan',
-    src: '/img/g-toucan.jpg',
-    title: 'Site inspector',
-    caption: 'Ramphastos sulfuratus, unannounced visit to pipe run 7.',
-    category: 'Fauna',
-    coords: '08°29′N 83°15′W',
-    width: 896,
-    height: 1200,
-  },
-  {
-    id: 'workbench',
-    src: '/img/g-workbench.jpg',
-    title: 'Bench, open air',
-    caption: 'Rework station 40 m from the high-tide line.',
-    category: 'Build',
-    coords: '08°32′N 83°18′W',
-    width: 1200,
-    height: 896,
-  },
-  {
-    id: 'reef',
-    src: '/img/g-reef.jpg',
-    title: 'Instrument package R-2',
-    caption: 'Temperature + pH logger, 9 m depth, month 14.',
-    category: 'Field',
-    coords: '08°27′N 83°12′W',
-    width: 1024,
-    height: 1024,
-  },
-  {
-    id: 'bridge',
-    src: '/img/g-bridge.jpg',
-    title: 'Canopy walk',
-    caption: 'Cable-stayed footbridge, 28 m above the forest floor.',
-    category: 'Build',
-    coords: '08°41′N 83°29′W',
-    width: 896,
-    height: 1200,
-  },
-  {
-    id: 'surf',
-    src: '/img/g-surf.jpg',
-    title: 'Wave period study',
-    caption: 'Black sand, 11 s swell, drone at 120 m.',
-    category: 'Field',
-    coords: '08°24′N 83°08′W',
-    width: 1376,
-    height: 768,
-  },
-  {
-    id: 'turbine',
-    src: '/img/g-turbine.jpg',
-    title: 'Micro-wind pilot',
-    caption: '3 kW turbine on the headland, golden hour.',
-    category: 'Build',
-    coords: '08°35′N 83°22′W',
-    width: 1200,
-    height: 896,
-  },
-  {
-    id: 'blueprint',
-    src: '/img/g-blueprint.jpg',
-    title: 'Rev C, with mango',
-    caption: 'Leaf-form solar canopy, drafted the slow way.',
-    category: 'Flora',
-    coords: '08°32′N 83°18′W',
-    width: 1024,
-    height: 1024,
-  },
-]
-
-export const galleryCategories: GalleryCategory[] = [
-  'Field',
-  'Build',
-  'Flora',
-  'Fauna',
 ]

@@ -16,7 +16,10 @@ const date = z
 const slug = text.regex(/^[a-zA-Z0-9]+(?:[-_][a-zA-Z0-9]+)*$/)
 const tags = z.array(text).default([])
 const url = z.url({ protocol: /^https?$/ })
+/** Each Markdown file is written in one language; `.es.md` files set `locale: es`. */
+const locale = z.enum(['en', 'es']).default('en')
 const datedFields = {
+  locale,
   summary: text,
   startDate: date,
   endDate: date.optional(),
@@ -47,6 +50,7 @@ export const blogSchema = z.object({
   content: z.string(),
 })
 export const projectSchema = z.object({
+  locale,
   title: text,
   description: text,
   tags,

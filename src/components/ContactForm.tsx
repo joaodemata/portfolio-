@@ -1,7 +1,9 @@
 import { useRef, useState, type FormEvent } from 'react'
 import { Mail, Send } from 'lucide-react'
+import { useT } from '../lib/i18n'
 
 export function ContactForm() {
+  const t = useT()
   const [status, setStatus] = useState<
     'idle' | 'pending' | 'error' | 'success'
   >('idle')
@@ -36,25 +38,27 @@ export function ContactForm() {
   return (
     <div className="ticks border-2 border-jungle bg-[#fbf6ea] p-6 text-jungle sm:p-10">
       <div className="mb-8 flex items-center justify-between">
-        <p className="spec text-ink/50">Form TX-01 · Transmission</p>
-        <p className="spec text-mango">● Channel open</p>
+        <p className="spec text-ink/50">{t.form.header}</p>
+        <p className="spec text-mango">{t.form.open}</p>
       </div>
       {status === 'success' ? (
         <div className="py-8 text-center">
-          <Mail aria-hidden="true" className="mx-auto mb-4 h-10 w-10 text-mango" />
+          <Mail
+            aria-hidden="true"
+            className="mx-auto mb-4 h-10 w-10 text-mango"
+          />
           <h2 className="mb-2 font-display text-3xl font-extrabold tracking-tight">
-            Message received
+            {t.form.receivedTitle}
           </h2>
           <p role="status" className="mb-8 text-ink/70">
-            Thanks for reaching out. Your message was accepted — expect a reply
-            within two working days (or one, if the surf is flat).
+            {t.form.receivedText}
           </p>
           <button
             type="button"
             className="contact-button"
             onClick={() => setStatus('idle')}
           >
-            Send another message
+            {t.form.another}
           </button>
         </div>
       ) : (
@@ -71,7 +75,7 @@ export function ContactForm() {
           <input type="hidden" name="form-name" value="contact" />
           <p hidden>
             <label>
-              Leave this empty
+              {t.form.honeypot}
               <input name="bot-field" tabIndex={-1} autoComplete="off" />
             </label>
           </p>
@@ -79,13 +83,10 @@ export function ContactForm() {
             disabled={status === 'pending'}
             className="min-w-0 space-y-8 disabled:opacity-70"
           >
-            <legend className="sr-only">Your message</legend>
+            <legend className="sr-only">{t.form.legend}</legend>
             <div>
-              <label
-                htmlFor="name"
-                className="spec block text-ink/60"
-              >
-                Name
+              <label htmlFor="name" className="spec block text-ink/60">
+                {t.form.name}
               </label>
               <input
                 id="name"
@@ -94,15 +95,12 @@ export function ContactForm() {
                 required
                 maxLength={100}
                 className="contact-input"
-                placeholder="Ada Lovelace"
+                placeholder={t.form.namePlaceholder}
               />
             </div>
             <div>
-              <label
-                htmlFor="email"
-                className="spec block text-ink/60"
-              >
-                Email
+              <label htmlFor="email" className="spec block text-ink/60">
+                {t.form.email}
               </label>
               <input
                 id="email"
@@ -112,15 +110,12 @@ export function ContactForm() {
                 required
                 maxLength={254}
                 className="contact-input"
-                placeholder="ada@station.org"
+                placeholder={t.form.emailPlaceholder}
               />
             </div>
             <div>
-              <label
-                htmlFor="message"
-                className="spec block text-ink/60"
-              >
-                Message
+              <label htmlFor="message" className="spec block text-ink/60">
+                {t.form.message}
               </label>
               <textarea
                 id="message"
@@ -129,21 +124,23 @@ export function ContactForm() {
                 maxLength={5000}
                 rows={6}
                 className="contact-input"
-                placeholder="Site, problem, timeline, how wet it gets…"
+                placeholder={t.form.messagePlaceholder}
               />
             </div>
             <button type="submit" className="contact-button">
               <Send aria-hidden="true" size={16} />
-              {status === 'pending' ? 'Sending…' : 'Send message'}
+              {status === 'pending' ? t.form.sending : t.form.send}
             </button>
           </fieldset>
           <p role="status" className="sr-only">
-            {status === 'pending' ? 'Sending your message…' : ''}
+            {status === 'pending' ? t.form.sendingStatus : ''}
           </p>
           {status === 'error' && (
-            <p role="alert" className="border-l-4 border-hibiscus pl-4 text-ink/80">
-              We couldn’t confirm your message. Your details are still here;
-              please try again. Local previews don’t process submissions.
+            <p
+              role="alert"
+              className="border-l-4 border-hibiscus pl-4 text-ink/80"
+            >
+              {t.form.error}
             </p>
           )}
         </form>

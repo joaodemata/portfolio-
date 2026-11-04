@@ -1,27 +1,20 @@
 import { Link } from '@tanstack/react-router'
+import { locales, useLocale, useT } from '../lib/i18n'
 import { site } from '../lib/site'
 
 const links = [
-  { to: '/', label: 'Index', n: '00' },
-  { to: '/projects', label: 'Work', n: '01' },
-  { to: '/gallery', label: 'Gallery', n: '02' },
-  { to: '/about', label: 'About', n: '03' },
-  { to: '/contact', label: 'Contact', n: '04' },
+  { to: '/', key: 'index', n: '00' },
+  { to: '/projects', key: 'work', n: '01' },
+  { to: '/gallery', key: 'gallery', n: '02' },
+  { to: '/about', key: 'about', n: '03' },
+  { to: '/contact', key: 'contact', n: '04' },
 ] as const
 
-const telemetry = [
-  'STATUS ● OPEN TO WORK',
-  `LOC ${site.coordinates}`,
-  'STACK NODE.JS · GO · TYPESCRIPT',
-  'DB POSTGRESQL · MONGODB',
-  'PROTO REST · SOAP · WEBSOCKETS',
-  'PLC STUDIO 5000 · TIA PORTAL',
-  'OEM JLR · VOLVO',
-  'LANG ES · PT · EN',
-  'COFFEE 3 / ∞',
-]
-
 export function SiteHeader() {
+  const { locale, setLocale } = useLocale()
+  const t = useT()
+  const [status, ...readings] = t.telemetry
+  const telemetry = [status, `LOC ${site.coordinates}`, ...readings]
   return (
     <header className="sticky top-0 z-40 bg-jungle text-paper">
       <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-x-6 gap-y-3 px-4 py-3 sm:px-6">
@@ -36,12 +29,13 @@ export function SiteHeader() {
             <span className="block font-display text-lg font-extrabold tracking-tight">
               {site.name}
             </span>
-            <span className="spec block text-paper/55">
-              Backend · Automation · rev 26.11
-            </span>
+            <span className="spec block text-paper/55">{t.nav.subtitle}</span>
           </span>
         </Link>
-        <nav aria-label="Main navigation" className="flex flex-wrap gap-1">
+        <nav
+          aria-label={t.nav.label}
+          className="flex flex-wrap items-center gap-1"
+        >
           {links.map((link) => (
             <Link
               key={link.to}
@@ -51,9 +45,31 @@ export function SiteHeader() {
               className="spec flex items-baseline gap-1.5 px-3 py-2 text-paper/80 transition-colors hover:bg-paper/10 hover:text-paper focus-visible:outline-2 focus-visible:outline-mango"
             >
               <span className="text-[9px] opacity-60">{link.n}</span>
-              {link.label}
+              {t.nav[link.key]}
             </Link>
           ))}
+          <div
+            role="group"
+            aria-label={t.nav.language}
+            className="ml-2 flex border border-paper/30"
+          >
+            {locales.map((l) => (
+              <button
+                key={l}
+                type="button"
+                lang={l}
+                aria-pressed={locale === l}
+                onClick={() => setLocale(l)}
+                className={`spec px-2.5 py-2 transition-colors focus-visible:outline-2 focus-visible:outline-mango ${
+                  locale === l
+                    ? 'bg-paper text-jungle'
+                    : 'text-paper/70 hover:bg-paper/10 hover:text-paper'
+                }`}
+              >
+                {l.toUpperCase()}
+              </button>
+            ))}
+          </div>
         </nav>
       </div>
       <div

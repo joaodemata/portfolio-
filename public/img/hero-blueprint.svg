@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <defs>
+    <pattern id="fine" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M20 0H0V20" fill="none" stroke="#17c2ae" stroke-opacity=".08" stroke-width="1"/>
+    </pattern>
+    <pattern id="major" width="100" height="100" patternUnits="userSpaceOnUse">
+      <rect width="100" height="100" fill="url(#fine)"/>
+      <path d="M100 0H0V100" fill="none" stroke="#17c2ae" stroke-opacity=".18" stroke-width="1"/>
+    </pattern>
+    <radialGradient id="glow" cx="65%" cy="40%" r="60%">
+      <stop offset="0" stop-color="#12422f"/>
+      <stop offset="1" stop-color="#0a261c"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#glow)"/>
+  <rect width="1600" height="900" fill="url(#major)"/>
+
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <!-- floor rail and fixture -->
+    <path d="M300 690H1500" stroke="#f3ead6" stroke-opacity=".35" stroke-width="2"/>
+    <path d="M300 700H1500" stroke="#f3ead6" stroke-opacity=".15" stroke-width="2" stroke-dasharray="14 10"/>
+    <path d="M560 690V640M760 690V640M980 690V640M1180 690V640" stroke="#f3ead6" stroke-opacity=".4" stroke-width="3"/>
+    <path d="M530 640H1210" stroke="#f3ead6" stroke-opacity=".4" stroke-width="3"/>
+
+    <!-- body in white, side profile -->
+    <path d="M500 610 L520 545 Q540 520 600 512 L700 505 Q760 440 840 425 L1010 418 Q1080 420 1120 470 L1150 505 Q1220 512 1235 545 L1245 610 Z"
+          stroke="#f3ead6" stroke-opacity=".9" stroke-width="3"/>
+    <path d="M720 505 Q775 450 845 440 L905 437 L905 505 Z M925 505 V436 L1005 434 Q1060 436 1095 480 L1110 505 Z"
+          stroke="#f3ead6" stroke-opacity=".55" stroke-width="2"/>
+    <path d="M905 505 V610 M700 505 V610 M1150 505 V610" stroke="#f3ead6" stroke-opacity=".35" stroke-width="2" stroke-dasharray="6 8"/>
+    <circle cx="640" cy="610" r="48" stroke="#f3ead6" stroke-opacity=".35" stroke-width="2" stroke-dasharray="4 6"/>
+    <circle cx="1100" cy="610" r="48" stroke="#f3ead6" stroke-opacity=".35" stroke-width="2" stroke-dasharray="4 6"/>
+
+    <!-- dimension line -->
+    <path d="M500 760H1245M500 748V772M1245 748V772" stroke="#17c2ae" stroke-opacity=".7" stroke-width="1.5"/>
+
+    <!-- robot 1 (right) -->
+    <path d="M1330 690H1450L1430 650H1350Z" stroke="#ff7a2f" stroke-width="3"/>
+    <path d="M1390 650V610" stroke="#ff7a2f" stroke-width="10"/>
+    <circle cx="1390" cy="600" r="18" stroke="#ff7a2f" stroke-width="3"/>
+    <path d="M1390 600 L1330 400" stroke="#ff7a2f" stroke-width="22"/>
+    <circle cx="1330" cy="400" r="16" stroke="#ff7a2f" stroke-width="3"/>
+    <path d="M1330 400 L1140 380" stroke="#ff7a2f" stroke-width="16"/>
+    <path d="M1140 380 L1110 410 M1110 410 L1092 440 M1110 410 L1128 436" stroke="#ff7a2f" stroke-width="5"/>
+
+    <!-- robot 2 (left) -->
+    <path d="M250 690H350L335 655H265Z" stroke="#ff7a2f" stroke-opacity=".8" stroke-width="3"/>
+    <path d="M300 655V620" stroke="#ff7a2f" stroke-opacity=".8" stroke-width="9"/>
+    <circle cx="300" cy="612" r="15" stroke="#ff7a2f" stroke-opacity=".8" stroke-width="3"/>
+    <path d="M300 612 L360 450" stroke="#ff7a2f" stroke-opacity=".8" stroke-width="18"/>
+    <circle cx="360" cy="450" r="13" stroke="#ff7a2f" stroke-opacity=".8" stroke-width="3"/>
+    <path d="M360 450 L520 520" stroke="#ff7a2f" stroke-opacity=".8" stroke-width="13"/>
+    <path d="M520 520 L548 540 M548 540 L560 566 M548 540 L572 538" stroke="#ff7a2f" stroke-opacity=".8" stroke-width="4"/>
+
+    <!-- light curtain / safety zone -->
+    <path d="M220 360V700M1500 300V700" stroke="#ef4677" stroke-opacity=".6" stroke-width="2" stroke-dasharray="2 10"/>
+
+    <!-- ladder rung -->
+    <g stroke="#17c2ae" stroke-opacity=".75" stroke-width="2">
+      <path d="M980 120V260M1500 120V260"/>
+      <path d="M980 160H1030M1060 160H1120M1150 160H1210M1240 160H1440M1470 160H1500"/>
+      <path d="M1030 145V175M1060 145V175M1120 145V175M1150 145V175M1135 150L1150 170"/>
+      <circle cx="1455" cy="160" r="15"/>
+      <path d="M980 220H1030M1060 220H1440M1470 220H1500M1030 205V235M1060 205V235"/>
+      <circle cx="1455" cy="220" r="15"/>
+    </g>
+  </g>
+
+  <!-- weld sparks -->
+  <g fill="#ff7a2f">
+    <circle cx="1092" cy="446" r="4"/><circle cx="1080" cy="456" r="2.5"/><circle cx="1104" cy="458" r="2"/>
+    <circle cx="562" cy="572" r="3.5"/><circle cx="574" cy="582" r="2"/>
+  </g>
+
+  <g font-family="JetBrains Mono, ui-monospace, monospace" font-size="15" letter-spacing="1.5">
+    <text x="980" y="110" fill="#17c2ae" fill-opacity=".8">NETWORK 12 — CYCLE TIME / BIW ZONE 30</text>
+    <text x="1012" y="195" fill="#17c2ae" fill-opacity=".7">FIXT_CLAMPED  RBT_HOME  !ESTOP</text>
+    <text x="1420" y="195" fill="#17c2ae" fill-opacity=".7">WELD</text>
+    <text x="1012" y="255" fill="#17c2ae" fill-opacity=".7">SEQ_DONE</text>
+    <text x="1418" y="255" fill="#17c2ae" fill-opacity=".7">ADV</text>
+    <text x="800" y="792" fill="#17c2ae" fill-opacity=".8">BODY SIDE · 4 745 mm</text>
+    <text x="230" y="350" fill="#ef4677" fill-opacity=".8">SAFETY ZONE A</text>
+    <text x="1300" y="730" fill="#ff7a2f" fill-opacity=".9">R01 · 6-AXIS</text>
+    <text x="230" y="730" fill="#ff7a2f" fill-opacity=".8">R02</text>
+
+    <g fill="#f3ead6" fill-opacity=".55" font-size="16">
+      <text x="120" y="130">POST /v1/payments  →  201 Created</text>
+      <text x="120" y="160">{ "merchant": "B2B-0042",</text>
+      <text x="120" y="186">  "amount": 1250.00,</text>
+      <text x="120" y="212">  "status": "SETTLED" }</text>
+      <text x="120" y="250" fill="#17c2ae" fill-opacity=".7">ws  ▸ order.matched  12 ms</text>
+    </g>
+  </g>
+</svg>
