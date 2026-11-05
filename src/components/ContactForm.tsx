@@ -19,7 +19,7 @@ export function ContactForm() {
     submitting.current = true
     setStatus('pending')
     try {
-      const response = await fetch('/contact.html', {
+      const response = await fetch('/__forms.html', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: body.toString(),
@@ -65,7 +65,7 @@ export function ContactForm() {
         <form
           name="contact"
           method="POST"
-          action="/contact.html"
+          action="/__forms.html"
           data-netlify="true"
           netlify-honeypot="bot-field"
           aria-busy={status === 'pending'}

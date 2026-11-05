@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs'
+import { readdirSync, readFileSync } from 'node:fs'
 import { act, cleanup, fireEvent, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { afterEach, describe, expect, it, vi } from 'vitest'
@@ -30,7 +30,7 @@ describe('contact delivery', () => {
     await user.click(screen.getByRole('button', { name: 'Send message' }))
     await screen.findByRole('heading', { name: 'Message received' })
     const [url, init] = fetch.mock.calls[0]
-    expect(url).toBe('/contact.html')
+    expect(url).toBe('/__forms.html')
     expect(init.method).toBe('POST')
     expect(init.headers['Content-Type']).toBe(
       'application/x-www-form-urlencoded',
@@ -127,7 +127,7 @@ describe('contact delivery', () => {
       vi
         .fn()
         .mockResolvedValue(
-          new Response(readFileSync('public/contact.html', 'utf8')),
+          new Response(readFileSync('public/__forms.html', 'utf8')),
         ),
     )
     const user = await fillForm()
@@ -166,7 +166,7 @@ describe('contact delivery', () => {
     const { container } = render(<ContactForm />)
     const form = container.querySelector('form')!
     const registration = new DOMParser()
-      .parseFromString(readFileSync('public/contact.html', 'utf8'), 'text/html')
+      .parseFromString(readFileSync('public/__forms.html', 'utf8'), 'text/html')
       .querySelector('form')!
     for (const attribute of [
       'name',
@@ -188,5 +188,14 @@ describe('contact delivery', () => {
     expect(form.querySelector('[name="bot-field"]')?.closest('p')?.hidden).toBe(
       true,
     )
+  })
+  it('keeps static HTML in public/ from shadowing a route', () => {
+    // Netlify's pretty URLs serve public/contact.html for /contact on a full
+    // page load, which left the contact page blank when opened directly.
+    const routes = readdirSync('src/routes')
+      .map((file) => file.replace(/\.tsx$/, ''))
+      .filter((name) => !name.startsWith('__') && name !== 'index')
+    const pages = readdirSync('public').filter((file) => file.endsWith('.html'))
+    for (const route of routes) expect(pages).not.toContain(`${route}.html`)
   })
 })
