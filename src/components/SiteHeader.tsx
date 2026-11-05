@@ -15,8 +15,9 @@ export function SiteHeader() {
   const t = useT()
   const [status, ...readings] = t.telemetry
   const telemetry = [status, `LOC ${site.coordinates}`, ...readings]
+  // Pinned only from md up: on phones the wrapped nav is ~190px tall.
   return (
-    <header className="sticky top-0 z-40 bg-jungle text-paper">
+    <header className="relative z-40 bg-jungle text-paper md:sticky md:top-0">
       <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-x-6 gap-y-3 px-4 py-3 sm:px-6">
         <Link
           to="/"

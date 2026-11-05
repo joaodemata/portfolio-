@@ -103,8 +103,9 @@ function About() {
         >
           {t.about.toolkitTitle}
         </h2>
-        <table className="w-full border-collapse font-mono text-sm">
-          <thead>
+        {/* Below sm each row stacks: number + category, then components. */}
+        <table className="w-full min-w-0 border-collapse font-mono text-sm">
+          <thead className="hidden sm:table-header-group">
             <tr className="spec border-b-2 border-jungle text-left text-ink/50">
               {t.about.toolkitHead.map((h, i) => (
                 <th
@@ -116,14 +117,19 @@ function About() {
               ))}
             </tr>
           </thead>
-          <tbody>
+          <tbody className="border-t-2 border-jungle sm:border-t-0">
             {t.about.toolkit.map(([cat, items], i) => (
-              <tr key={cat} className="border-b border-jungle/20 align-top">
-                <td className="py-4 pr-4 text-mango">
+              <tr
+                key={cat}
+                className="grid grid-cols-[3rem_minmax(0,1fr)] border-b border-jungle/20 py-4 align-top sm:table-row sm:py-0"
+              >
+                <td className="text-mango sm:py-4 sm:pr-4">
                   {String(i + 1).padStart(3, '0')}
                 </td>
-                <td className="py-4 pr-4 font-semibold">{cat}</td>
-                <td className="py-4 text-ink/75">{items}</td>
+                <td className="font-semibold sm:py-4 sm:pr-4">{cat}</td>
+                <td className="col-start-2 mt-1 break-words text-ink/75 sm:mt-0 sm:py-4">
+                  {items}
+                </td>
               </tr>
             ))}
           </tbody>
