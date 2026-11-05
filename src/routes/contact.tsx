@@ -39,11 +39,13 @@ function Contact() {
         }
       />
 
-      <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr]">
+      {/* minmax(0, …) lets the truncated social handles shrink instead of
+          widening the column past the screen on phones. */}
+      <div className="grid grid-cols-[minmax(0,1fr)] gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
         <section aria-labelledby="channels">
           <p className="max-w-lg text-xl text-ink/80">{t.contact.intro}</p>
 
-          <div className="mt-8 inline-flex items-center gap-3 border-2 border-jungle bg-lagoon/20 px-4 py-2">
+          <div className="mt-8 inline-flex max-w-full items-center gap-3 border-2 border-jungle bg-lagoon/20 px-4 py-2">
             <span className="h-2 w-2 animate-pulse rounded-full bg-fern" />
             <span className="spec">{t.availability}</span>
           </div>
