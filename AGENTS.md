@@ -25,7 +25,7 @@ local Markdown and TypeScript data.
 
 ## Contact form
 
-`ContactForm` POSTs URL-encoded `form-name`, `name`, `email`, `message`, `bot-field` to `/contact.html`. Keep field names in sync with `public/contact.html` (the static Netlify Forms registration) and `ContactForm.test.tsx`. Netlify Forms is enabled for the site.
+`ContactForm` POSTs URL-encoded `form-name`, `name`, `email`, `message`, `bot-field` to `/__forms.html`. Keep field names in sync with `public/__forms.html` (the static Netlify Forms registration; it must not share a name with a route, or Netlify serves it in place of that page) and `ContactForm.test.tsx`. Netlify Forms is enabled for the site.
 
 ## Removed from the starter
 
